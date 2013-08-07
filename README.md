@@ -1,4 +1,4 @@
 Criminal Case Feed
 ================
 
-Fetch your daily gift easly
+Fetch your daily gift easily
