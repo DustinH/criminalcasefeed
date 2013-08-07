@@ -104,7 +104,6 @@ function fetchComments(e) {
   if (e)
     e.preventDefault();
 
-  console.log('Fetching information...');
   var btn = $('.btn-refresh');
   btn.button('loading');
   var query = 'SELECT text, time FROM comment WHERE post_id IN ( SELECT post_id FROM stream WHERE source_id = 129079313911235 LIMIT 1 )';
@@ -134,7 +133,6 @@ function fetchComments(e) {
       var comment = response[i];
       var filtered = comment.text.match(/http[s]?:\/\/apps.facebook.com\/criminalcase\/reward\.php\?reward_key\=[0-9a-fA-F]+&sender=([0-9]+)&reward_type=([0-9])/i);
       var trimmed = comment.text.replace(/http[s]?:\/\/apps.facebook.com\/criminalcase\/reward\.php\?reward_key\=[0-9a-fA-F]+&sender=[0-9]+&reward_type=[0-9][a-zA-Z0-9\=&_]+/i, '');
-      console.log(filtered);
       if (filtered)
         addGift(filtered[0], filtered[1], filtered[2], new Date(comment.time * 1000), trimmed);
     }
