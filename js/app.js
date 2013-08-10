@@ -106,7 +106,7 @@ function fetchComments(e) {
 
   var btn = $('.btn-refresh');
   btn.button('loading');
-  var query = 'SELECT text, time FROM comment WHERE post_id IN ( SELECT post_id FROM stream WHERE source_id = 129079313911235 LIMIT 1 )';
+  var query = 'SELECT text, time FROM comment WHERE post_id IN ( SELECT post_id FROM stream WHERE source_id = 129079313911235 AND type IN (80, 128, 247) LIMIT 1 )';
   if (time) {
     query += ' AND time > ' + time;
   }
