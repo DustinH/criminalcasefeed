@@ -132,15 +132,21 @@ function fetchComments(e) {
 
     if (first)
       $('#list').html('');
-
-    $('#list li.new').removeClass('new');
+    
+    var added = false;
 
     for (var i in response) {
       var comment = response[i];
       var filtered = comment.text.match(/http[s]?:\/\/apps.facebook.com\/criminalcase\/reward\.php\?reward_key\=[0-9a-fA-F]+&sender=([0-9]+)&reward_type=([0-9])/i);
       var trimmed = comment.text.replace(/http[s]?:\/\/apps.facebook.com\/criminalcase\/reward\.php\?reward_key\=[0-9a-fA-F]+&sender=[0-9]+&reward_type=[0-9][a-zA-Z0-9\=&_]+/i, '');
-      if (filtered)
+      if (filtered) {
         addGift(filtered[0], filtered[1], filtered[2], new Date(comment.time * 1000), trimmed);
+        added = true;
+      }
+    }
+    
+    if (added) {
+      $('#list li.new').removeClass('new');
     }
 
     first = false;
