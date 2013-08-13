@@ -134,6 +134,7 @@ function fetchComments(e) {
       $('#list').html('');
     
     var added = false;
+    var $oldnews = $('#list li.new');
 
     for (var i in response) {
       var comment = response[i];
@@ -146,7 +147,7 @@ function fetchComments(e) {
     }
     
     if (added) {
-      $('#list li.new').removeClass('new');
+      $oldnews.removeClass('new');
     }
 
     first = false;
