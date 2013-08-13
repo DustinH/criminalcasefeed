@@ -100,6 +100,11 @@ function addGift(url, sender, type, date, text) {
     $('#list').prepend(html);
 }
 
+function kickTimer() {
+  clearTimeout(timerId);
+  timerId = setTimeout(fetchComments, 10000);
+}
+
 function fetchComments(e) {
   if (e)
     e.preventDefault();
@@ -119,10 +124,11 @@ function fetchComments(e) {
   }, function(response) {
     btn.button('reset');
 
-    if (response.length > 0)
+    if (response.length > 0) {
       time = response[0].time;
-    else
-      return;
+    } else {
+      return kickTimer();
+    }
 
     if (first)
       $('#list').html('');
@@ -138,7 +144,6 @@ function fetchComments(e) {
     }
 
     first = false;
-    clearTimeout(timerId);
-    timerId = setTimeout(fetchComments, 10000);
+    kickTimer();
   });
 }
